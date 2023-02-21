@@ -1,0 +1,17 @@
+BoneYard
+docs
+__pycache__
+
+# Microsoft shortcuts.
+*.lnk
+
+# Kubuntu
+.directory
+
+# KDevelop
+*.kdev4
+
+# QtCreator
+CMakeLists.txt.user
+
+*build
