@@ -105,10 +105,6 @@ vtkSmartPointer<vtkImageData> Polydata2ImageData(vtkSmartPointer<vtkPolyData> pd
     std::cout << "getbounds from custom function \n";
     GetPolydataBounds(pd, bounds);
   }
-  // double spacing[3]; // desired volume spacing
-  // spacing[0] = 0.5;
-  // spacing[1] = 0.5;
-  // spacing[2] = 0.5;
   
   // compute dimensions
   int dim[3];
