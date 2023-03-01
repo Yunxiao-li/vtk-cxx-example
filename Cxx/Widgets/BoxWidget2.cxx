@@ -12,6 +12,7 @@
 #include <vtkRenderWindowInteractor.h>
 #include <vtkRenderer.h>
 #include <vtkTransform.h>
+#include <vtkPlanes.h>
 
 namespace {
 class vtkBoxCallback : public vtkCommand
@@ -23,6 +24,7 @@ public:
   }
 
   vtkSmartPointer<vtkActor> m_actor;
+  vtkSmartPointer<vtkPlanes> m_planes;
 
   void SetActor(vtkSmartPointer<vtkActor> actor)
   {
@@ -35,10 +37,15 @@ public:
         dynamic_cast<vtkBoxWidget2*>(caller);
 
     vtkNew<vtkTransform> t;
-
+    
+    auto *boxRep = vtkBoxRepresentation::SafeDownCast(boxWidget->GetRepresentation());
     dynamic_cast<vtkBoxRepresentation*>(boxWidget->GetRepresentation())
         ->GetTransform(t);
-    this->m_actor->SetUserTransform(t);
+    // this->m_actor->SetUserTransform(t);
+    boxRep->SetInsideOut(1);
+    boxRep->GetPlanes(m_planes);
+    this->m_actor->GetMapper()->SetClippingPlanes(m_planes);
+    this->m_actor->GetMapper()->Update();
   }
 
   vtkBoxCallback()

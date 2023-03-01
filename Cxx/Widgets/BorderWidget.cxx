@@ -131,7 +131,7 @@ vtkNew<vtkLookupTable> GetPlatonicLUT()
 vtkCustomBorderWidget::vtkCustomBorderWidget()
 {
   this->CallbackMapper->SetCallbackMethod(
-      vtkCommand::MiddleButtonReleaseEvent, vtkWidgetEvent::EndSelect, this,
+      vtkCommand::LeftButtonReleaseEvent, vtkWidgetEvent::EndSelect, this,
       vtkCustomBorderWidget::EndSelectAction);
 }
 

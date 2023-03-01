@@ -1,8 +1,9 @@
 project (${WIKI}PolyData)
 
+set(VTK_DIR /home/jackie/works/code/opensource/vtk/vtk9.2-install/debug/lib/cmake/vtk-9.2)
 if(NOT VTK_BINARY_DIR)
   set(optional "")
-  Add_Optional_If_In_Library(Boolean "${VTK_AVAILABLE_COMPONENTS}" optional)
+  # Add_Optional_If_In_Library(Boolean "${VTK_AVAILABLE_COMPONENTS}" optional)
   set(VTK_LIBRARIES "")
   find_package(VTK COMPONENTS
     CommonColor
@@ -52,7 +53,7 @@ set(KIT_LIBS ${VTK_LIBRARIES})
 # Build all .cxx files in the directory
 file(GLOB ALL_FILES *.cxx)
 
-Requires_Class(AlignTwoPolyDatas HausdorffDistancePointSetFilter)
+# Requires_Class(AlignTwoPolyDatas HausdorffDistancePointSetFilter)
 
 foreach(SOURCE_FILE ${ALL_FILES})
   string(REPLACE ".cxx" "" TMP ${SOURCE_FILE})

@@ -1,5 +1,6 @@
 project (${WIKI}Tutorial)
 
+set(VTK_DIR /home/jackie/works/code/opensource/vtk/vtk9.2-install/debug/lib/cmake/vtk-9.2)
 if(NOT VTK_BINARY_DIR)
   set(VTK_LIBRARIES "")
   find_package(VTK COMPONENTS
