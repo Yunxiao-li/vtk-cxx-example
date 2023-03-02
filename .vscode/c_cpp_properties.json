@@ -1,0 +1,29 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/home/jackie/works/code/opensource/vtk/vtk9.2-install/debug/include/vtk-9.2"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-clang-x64",
+            "configurationProvider": "ms-vscode.cmake-tools"
+        },
+        {
+            "name": "config_inlude_my",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-clang-x64"
+        }
+    ],
+    "version": 4
+}

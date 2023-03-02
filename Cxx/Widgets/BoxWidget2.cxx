@@ -13,6 +13,7 @@
 #include <vtkRenderer.h>
 #include <vtkTransform.h>
 #include <vtkPlanes.h>
+#include "vtkGenericDataObjectReader.h"
 
 namespace {
 class vtkBoxCallback : public vtkCommand
@@ -45,7 +46,9 @@ public:
     boxRep->SetInsideOut(1);
     boxRep->GetPlanes(m_planes);
     this->m_actor->GetMapper()->SetClippingPlanes(m_planes);
-    this->m_actor->GetMapper()->Update();
+    vtkNew<vtkPolyDataMapper> mapper;
+    mapper->ShallowCopy(this->m_actor->GetMapper());
+    this->m_actor->SetMapper(mapper);
   }
 
   vtkBoxCallback()
@@ -54,15 +57,23 @@ public:
 };
 } // namespace
 
-int main(int vtkNotUsed(argc), char* vtkNotUsed(argv)[])
+int main(int argc, char* argv[])
 {
   vtkNew<vtkNamedColors> colors;
-
-  vtkNew<vtkConeSource> coneSource;
-  coneSource->SetHeight(1.5);
-
   vtkNew<vtkPolyDataMapper> mapper;
-  mapper->SetInputConnection(coneSource->GetOutputPort());
+  if (argc > 1) {
+    // vtk file
+    auto MeshReader = vtkSmartPointer<vtkGenericDataObjectReader>::New();
+    MeshReader->SetFileName(argv[1]);
+    MeshReader->Update();
+    mapper->SetInputData(MeshReader->GetPolyDataOutput());
+  } else {
+    vtkNew<vtkConeSource> coneSource;
+    coneSource->SetHeight(1.5);
+  
+    mapper->SetInputConnection(coneSource->GetOutputPort());
+  }
+  
 
   vtkNew<vtkActor> actor;
   actor->SetMapper(mapper);

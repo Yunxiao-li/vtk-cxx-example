@@ -1,5 +1,5 @@
 {    
-    "cmake.sourceDirectory": "${workspaceFolder}/Cxx/PolyData",
+    "cmake.sourceDirectory": "${workspaceFolder}/Cxx/Widgets",
     "files.associations": {
         "iostream": "cpp",
         "array": "cpp",
@@ -60,6 +60,8 @@
         "streambuf": "cpp",
         "thread": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
-    }
+        "typeinfo": "cpp",
+        "*.txx": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
