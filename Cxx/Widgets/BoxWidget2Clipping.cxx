@@ -22,8 +22,15 @@
 #include "vtkDataArray.h"
 #include "vtkDoubleArray.h"
 #include "vtkAlgorithmOutput.h"
+#include <vtkSTLWriter.h>
+#include "vtkFillHolesFilter.h"
+#include "vtkPolyDataMapper.h"
+
 #include <tuple>
 
+/// @brief using vtkClipPolyData to clip polydata
+/// using vtkFillHolesFilter to generate closet polydata
+/// using vtkBoxWidget2 to generate clip planes
 int main(int argc, char *argv[])
 {
   //box widget
@@ -105,9 +112,35 @@ int main(int argc, char *argv[])
       // clip->GetOutput()->PrintSelf(std::cout, vtkIndent(0));
       // vtkNew<vtkPolyData> polydata;
       // polydata->DeepCopy(clip->GetClippedOutput());
-      // polydata->PrintSelf(std::cout, vtkIndent(0));    
+      // polydata->PrintSelf(std::cout, vtkIndent(0));
+      #if 1 // test fillholesfilter
+      vtkNew<vtkFillHolesFilter> fillHolesFilter;
+      // fillHolesFilter->SetInputConnection(clip->GetOutputPort());
+      fillHolesFilter->SetInputData(clip->GetOutput());
+      fillHolesFilter->SetHoleSize(100000.0);
+      fillHolesFilter->Update();
+      if (0) {
+        // write closed surface to file
+        vtkNew<vtkSTLWriter> writer;
+        writer->SetFileName("nfz_closed.stl");
+        writer->SetInputConnection(fillHolesFilter->GetOutputPort());
+        writer->Write();
+        std::cout << "save closed surface stl success \n";
+      }
+
+      clipperPoly->SetInputData(fillHolesFilter->GetOutput());
+      clipperPoly->SetClipFunction(planesClipping);
+      #else
       clipperPoly->SetInputData(clip->GetOutput());
       clipperPoly->SetClipFunction(planesClipping);
+      #endif
+      // write polydata to stl file
+      if (0) {
+        vtkNew<vtkSTLWriter> writer;
+        writer->SetFileName("noflyzone.stl");
+        writer->SetInputConnection(clip->GetOutputPort());
+        writer->Write();
+      }
     } else {
       // clipping structure    
       clipperPoly->SetInputData(MeshReader->GetPolyDataOutput());
@@ -187,7 +220,7 @@ int main(int argc, char *argv[])
       std::cout << "normal " << i << ": " << normal[0] << ", " << normal[1] << ", " << normal[2] << std::endl;
     }
     vtkIndent indent(0);
-    points->PrintSelf(std::cout, vtkIndent(1));
+    // points->PrintSelf(std::cout, vtkIndent(1));
     // clipperPoly = nullptr;
   };
   vtkSmartPointer<vtkCallbackCommand> interactionCallback = vtkSmartPointer<vtkCallbackCommand>::New();

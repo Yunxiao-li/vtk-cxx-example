@@ -1,5 +1,5 @@
 {    
-    "cmake.sourceDirectory": "${workspaceFolder}/Cxx/Widgets",
+    "cmake.sourceDirectory": "${workspaceFolder}/Cxx/Meshes",
     "files.associations": {
         "iostream": "cpp",
         "array": "cpp",

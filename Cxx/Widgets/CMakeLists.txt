@@ -10,10 +10,12 @@ if(NOT VTK_BINARY_DIR)
     CommonTransforms
     FiltersCore
     FiltersSources
+    FiltersModeling 
     GeovisCore
     IOImage
     IOLegacy
     IOXML
+    IOGeometry
     ImagingGeneral
     ImagingHybrid
     ImagingSources

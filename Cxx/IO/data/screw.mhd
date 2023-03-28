@@ -1,0 +1,14 @@
+ObjectType = Image
+NDims = 3
+BinaryData = True
+BinaryDataByteOrderMSB = False
+CompressedData = True
+CompressedDataSize = 15521
+TransformMatrix = 1 0 0 0 1 0 0 0 1
+Offset = -3.8880980968475343 -50.100000000000001 -3.83054838180542
+CenterOfRotation = 0 0 0
+ElementSpacing = 0.20000000298023224 0.20000000298023224 0.20000000298023224
+DimSize = 40 279 40
+AnatomicalOrientation = ???
+ElementType = MET_UCHAR
+ElementDataFile = screw.raw

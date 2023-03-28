@@ -49,6 +49,8 @@ public:
     vtkNew<vtkPolyDataMapper> mapper;
     mapper->ShallowCopy(this->m_actor->GetMapper());
     this->m_actor->SetMapper(mapper);
+    int *pos = boxWidget->GetInteractor()->GetEventPosition();
+    std::cout << "pos: " << pos[0] << ", " << pos[1] << std::endl;
   }
 
   vtkBoxCallback()

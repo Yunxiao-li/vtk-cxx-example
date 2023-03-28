@@ -14,23 +14,24 @@
 int main(int, char*[])
 {
   vtkNew<vtkNamedColors> colors;
-
+  std::string filePath = "mesh.mhd";
+  std::string filePathRaw = "mesh.raw";
   // adapt path !
-  std::string filePath = "julia_mha.mhd";
-  std::string filePathRaw = "julia_mha.raw";
+  // std::string filePath = "julia_mha.mhd";
+  // std::string filePathRaw = "julia_mha.raw";
   // Create an image
-  vtkNew<vtkImageMandelbrotSource> source;
+  // vtkNew<vtkImageMandelbrotSource> source;
 
-  vtkNew<vtkImageCast> castFilter;
-  castFilter->SetOutputScalarTypeToUnsignedChar();
-  castFilter->SetInputConnection(source->GetOutputPort());
-  castFilter->Update();
+  // vtkNew<vtkImageCast> castFilter;
+  // castFilter->SetOutputScalarTypeToUnsignedChar();
+  // castFilter->SetInputConnection(source->GetOutputPort());
+  // castFilter->Update();
 
-  vtkNew<vtkMetaImageWriter> writer;
-  writer->SetInputConnection(castFilter->GetOutputPort());
-  writer->SetFileName(filePath.c_str());
-  writer->SetRAWFileName(filePathRaw.c_str());
-  writer->Write();
+  // vtkNew<vtkMetaImageWriter> writer;
+  // writer->SetInputConnection(castFilter->GetOutputPort());
+  // writer->SetFileName(filePath.c_str());
+  // writer->SetRAWFileName(filePathRaw.c_str());
+  // writer->Write();
 
   // Read and display file for verification that it was written correctly
   vtkNew<vtkMetaImageReader> reader;

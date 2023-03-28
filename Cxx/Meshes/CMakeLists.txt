@@ -1,5 +1,5 @@
 project (${WIKI}Meshes)
-
+set(VTK_DIR /home/jackie/works/code/opensource/vtk/vtk9.2-install/debug/lib/cmake/vtk-9.2)
 if(NOT VTK_BINARY_DIR)
   set(VTK_LIBRARIES "")
   find_package(VTK COMPONENTS
@@ -46,8 +46,8 @@ set(KIT_LIBS ${VTK_LIBRARIES})
 file(GLOB ALL_FILES *.cxx)
 
 set(VERSION_MIN "6.0")
-Requires_Version(DeformPointSet ${VERSION_MIN} ALL_FILES)
-Requires_Version(FitToHeightMap "8.2" ALL_FILES)
+# Requires_Version(DeformPointSet ${VERSION_MIN} ALL_FILES)
+# Requires_Version(FitToHeightMap "8.2" ALL_FILES)
 
 foreach(SOURCE_FILE ${ALL_FILES})
   string(REPLACE ".cxx" "" TMP ${SOURCE_FILE})
